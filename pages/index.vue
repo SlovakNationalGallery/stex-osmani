@@ -90,9 +90,7 @@ function onMicrioError() {
       </template>
     </Navbar>
     <!-- This will become initial Modal -->
-    <div class="w-screen h-20 bg-white z-50" id="start-overlay">
-
-    </div>
+    <div class="z-50 h-20 w-screen bg-white" id="start-overlay"></div>
     <div class="h-full w-full">
       <ClientOnly>
         <NuxtErrorBoundary @error="onMicrioError">
@@ -102,7 +100,7 @@ function onMicrioError() {
             @show="micrio = $event"
             @update="micrio = $event"
             @marker-open="onMarkerOpen"
-            >
+          >
             <template #marker="marker">
               <PulsatingMarker
                 class="visible absolute -left-1/2 -top-1/2 flex h-16 w-16 items-center justify-center"
@@ -148,7 +146,9 @@ function onMicrioError() {
                 <span>{{ micrio.marker.title }}</span>
               </template>
               <template #body>
-                <div v-html="micrio.marker.body" class="text-xl" />
+                <AudioPlayer
+                  class="relative pointer-events-auto flex w-full flex-col items-center justify-between"
+                />
               </template>
             </Annotation>
           </div>
