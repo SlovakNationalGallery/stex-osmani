@@ -147,7 +147,7 @@ function onMicrioError() {
               </template>
               <template #body>
                 <AudioPlayer
-                  class="relative pointer-events-auto flex w-full flex-col items-center justify-between"
+                  class="relative pointer-events-auto flex w-full flex-col items-center justify-between"  
                 />
               </template>
             </Annotation>
