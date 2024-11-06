@@ -22,15 +22,6 @@ useHead({
   script: [{ src: "https://b.micr.io/micrio-4.3.min.js" }],
 });
 
-const slots = defineSlots<{
-  marker(props: (typeof markers)["value"][number]): any;
-  controls(props: {
-    cancelTour: () => void;
-    nextMarker: () => void;
-    previousMarker: () => void;
-  }): any;
-}>();
-
 const micrioRef = shallowRef<HTMLMicrioElement>();
 const dataRef = shallowRef<HTMLMicrioElement["$current"]["$data"]>();
 
@@ -83,11 +74,19 @@ const markers = computed(() => {
   }));
 });
 
+const initialMarker = computed(() =>
+  markers.value.find((marker) => marker.index === 0),
+);
+
 onMounted(() => {
   const micrio = micrioRef.value;
   if (!micrio) return;
 
   micrio.defaultSettings = {
+    noZoom: true,
+    hookDrag: false,
+    hookPinch: false,
+    freeMove: false,
     _markers: {
       noTitles: true,
       autoStartTour: true,
@@ -135,20 +134,24 @@ function cancelTour() {
   micrioRef.value?.state.tour.set(undefined);
 }
 
-function changeStepBy(delta: number) {
+async function changeStepBy(delta: number) {
   const tour = micrioRef.value?.state.$tour as
     | Models.ImageCultureData.MarkerTour
     | undefined;
+  const camera = micrioRef.value?.camera
   if (tour?.goto === undefined) return;
+  if (!camera) return;
 
-  if (delta > 0) {
-    tour.goto((tour.currentStep! + delta) % tour.steps.length);
+  if (
+    tour.currentStep! + delta > tour.steps.length - 1 ||
+    tour.currentStep! + delta < 0
+  ) {
+    cancelTour();
+    await camera.flyToFullView();
+    return;
   }
 
-  if (delta < 0) {
-    const nextStep = tour.currentStep! - (-delta % tour.steps.length);
-    tour.goto(nextStep < 0 ? tour.steps.length + nextStep : nextStep);
-  }
+  tour.goto(tour.currentStep! + delta);
 }
 </script>
 
@@ -164,7 +167,9 @@ function changeStepBy(delta: number) {
     toolbar="false"
     minimap="false"
   />
-  <Teleport v-for="marker in markers" :to="`#m-${marker.id} > button`">
-    <slot name="marker" v-bind="marker"></slot>
+  <Teleport to="#start-overlay">
+    <button class="bg-red-500" @click="initialMarker.open()">
+      Start journey
+    </button>
   </Teleport>
 </template>

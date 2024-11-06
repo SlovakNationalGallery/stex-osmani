@@ -3,13 +3,9 @@ import type { Micrio } from "../components/Micrio.vue";
 import XMark from "~/assets/img/x-mark.svg?component";
 import Question from "~/assets/img/question.svg?component";
 import Navbar from "~/layouts/Navbar.vue";
-import HandTap from "~/assets/img/hand-tap.svg?component";
-import MagnifyingGlassPlus from "~/assets/img/magnifying-glass-plus.svg?component";
-import ArrowOutCardinal from "~/assets/img/arrow-out-cardinal.svg?component";
 import TransitionOpacity from "~/components/TransitionOpacity.vue";
 import EyeIcon from "~/assets/img/eye.svg?component";
 
-const cameraPreset = ref<"zoom-out" | null>(null);
 const micrio = ref<Micrio["Instance"]>();
 
 const { locale } = useI18n();
@@ -29,7 +25,6 @@ watch(locale, async () => {
   micrio.value?.tour?.cancel();
   await micrio.value?.camera.flyToFullView();
   lang.value = locale.value;
-  cameraPreset.value = "zoom-out";
 });
 
 onMounted(() => {
@@ -40,19 +35,10 @@ onMounted(() => {
 watch(micrio, (micrio, oldMicrio) => {
   if (!micrio) return;
 
-  // Initialization
-  if (!oldMicrio && micrio) {
-    cameraPreset.value = "zoom-out";
-  }
-
   // Reset camera on navigation
   if (micrio.events.isNavigating) {
     micrio.tour?.cancel();
     return;
-  }
-
-  if (micrio.tour) {
-    cameraPreset.value = null;
   }
 
   if (oldMicrio) {
@@ -62,18 +48,6 @@ watch(micrio, (micrio, oldMicrio) => {
   homescreenTimer.reset();
   hintTimer.reset();
 });
-
-watch(cameraPreset, async (preset) => {
-  if (preset === "zoom-out") {
-    await micrio.value?.camera.flyToFullView();
-  }
-});
-
-// Micrio only emits tour-started when the camera has settled
-// so we use marker-open as a proxy event
-function onMarkerOpen() {
-  cameraPreset.value = null;
-}
 
 function onMicrioError() {
   window.location.reload();
@@ -115,31 +89,10 @@ function onMicrioError() {
         </button>
       </template>
     </Navbar>
-    <TransitionOpacity>
-      <div
-        v-if="isOpenHint"
-        class="absolute right-9 top-32 z-10 grid grid-cols-3 gap-8 rounded-xl bg-black/75 p-6"
-      >
-        <div
-          class="absolute -top-[25px] right-24 h-0 w-0 border-b-[25px] border-l-[25px] border-r-[25px] border-b-black/75 border-l-transparent border-r-transparent"
-        />
-        <div class="flex w-48 flex-col items-center gap-2.5 text-white">
-          <HandTap class="h-8 w-8" />
-          <span class="text-xl font-bold">{{ $t("Open hotspot") }}</span>
-          <span>{{ $t("Tap a number") }}</span>
-        </div>
-        <div class="flex w-48 flex-col items-center gap-2.5 text-white">
-          <MagnifyingGlassPlus class="h-8 w-8" />
-          <span class="text-xl font-bold">{{ $t("Zoom") }}</span>
-          <span>{{ $t("Pinch with two fingers") }}</span>
-        </div>
-        <div class="flex w-48 flex-col items-center gap-2.5 text-white">
-          <ArrowOutCardinal class="h-8 w-8" />
-          <span class="text-xl font-bold">{{ $t("Pan") }}</span>
-          <span>{{ $t("Drag with two fingers") }}</span>
-        </div>
-      </div>
-    </TransitionOpacity>
+    <!-- This will become initial Modal -->
+    <div class="w-screen h-20 bg-white z-50" id="start-overlay">
+
+    </div>
     <div class="h-full w-full">
       <ClientOnly>
         <NuxtErrorBoundary @error="onMicrioError">
@@ -149,7 +102,7 @@ function onMicrioError() {
             @show="micrio = $event"
             @update="micrio = $event"
             @marker-open="onMarkerOpen"
-          >
+            >
             <template #marker="marker">
               <PulsatingMarker
                 class="visible absolute -left-1/2 -top-1/2 flex h-16 w-16 items-center justify-center"
