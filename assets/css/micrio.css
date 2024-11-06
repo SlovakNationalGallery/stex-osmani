@@ -1,0 +1,14 @@
+/* Popups */
+micr-io .micrio-marker-popup {
+  @apply hidden;
+}
+
+/* Hide markers */
+micr-io .micrio-marker > button {
+  @apply invisible;
+}
+
+/* Hide tour controls */
+micr-io .micrio-tour {
+  @apply hidden;
+}
