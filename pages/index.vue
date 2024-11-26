@@ -80,7 +80,7 @@ function onMicrioError() {
     class="absolute inset-0 select-none overflow-hidden bg-black/50 font-body"
   >
     <Navbar
-      class="fixed top-0 z-10 flex h-20 w-full items-center justify-between backdrop-blur-sm bg-black/60 text-white"
+      class="fixed top-0 z-10 flex h-20 w-full items-center justify-between bg-black/60 text-white"
       ref="navbar"
       v-if="!overlay"
     >
@@ -107,10 +107,10 @@ function onMicrioError() {
     </Navbar>
     <!-- Initial Idle screen -->
     <div
-      class="absolute top-0 z-10 h-full w-full bg-black/60 text-white"
+      class="absolute top-0 z-10 h-full w-full bg-black/60 text-white backdrop-blur-lg"
       v-show="overlay === 'intro'"
     >
-      <Navbar class="flex h-20 w-full items-center justify-between backdrop-blur-sm">
+      <Navbar class="flex h-20 w-full items-center justify-between">
         <template v-slot:icon class="w-20">
           <div class="flex h-full w-20 items-center justify-center">
             <Logo class="h-10 w-10 text-white" />
@@ -128,7 +128,7 @@ function onMicrioError() {
         </template>
       </Navbar>
       <div
-        class="flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6 backdrop-blur-sm"
+        class="flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6"
       >
         <div class="flex max-w-lg flex-col gap-16">
           <article class="flex flex-col gap-9">
@@ -143,17 +143,17 @@ function onMicrioError() {
         <div class="flex h-full w-full items-center justify-center">
           <img
             src="/assets/img/intro_screen.png"
-            class="rounded-3xl object-contain"
+            class="rounded-3xl object-contain max-h-full max-w-full"
           />
         </div>
       </div>
     </div>
     <!-- Hint Idle screen -->
     <div
-      class="absolute top-0 z-10 h-full w-full bg-black/60 text-white"
+      class="absolute top-0 z-10 h-full w-full bg-black/60 text-white backdrop-blur-lg"
       v-show="overlay === 'hint'"
     >
-      <Navbar class="flex h-20 w-full items-center justify-between backdrop-blur-sm">
+      <Navbar class="flex h-20 w-full items-center justify-between">
         <template v-slot:icon class="w-20">
           <div class="flex h-full w-20 items-center justify-center">
             <Logo class="h-10 w-10 text-white" />
@@ -171,7 +171,7 @@ function onMicrioError() {
         </template>
       </Navbar>
       <div
-        class="flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6 backdrop-blur-sm"
+        class="flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6"
       >
         <div class="flex flex-col gap-16">
           <article class="flex flex-col gap-9">
@@ -194,7 +194,7 @@ function onMicrioError() {
         <div class="flex h-full w-full items-center justify-center">
           <img
             src="/assets/img/intro_screen.png"
-            class="rounded-3xl object-contain"
+            class="rounded-3xl object-contain max-h-full max-w-full"
           />
         </div>
       </div>
