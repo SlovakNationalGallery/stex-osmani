@@ -80,7 +80,7 @@ function onMicrioError() {
     class="absolute inset-0 select-none overflow-hidden bg-black/50 font-body"
   >
     <Navbar
-      class="fixed top-0 z-10 flex h-20 w-full items-center justify-between bg-black/60 text-white"
+      class="fixed top-0 z-10 flex h-20 w-full items-center justify-between bg-black/80 text-white"
       ref="navbar"
       v-if="!overlay"
     >
@@ -110,7 +110,9 @@ function onMicrioError() {
       class="absolute top-0 z-10 h-full w-full bg-black/60 text-white backdrop-blur-lg"
       v-show="overlay === 'intro'"
     >
-      <Navbar class="flex h-20 w-full items-center justify-between">
+      <Navbar
+        class="flex h-20 w-full items-center justify-between"
+      >
         <template v-slot:icon class="w-20">
           <div class="flex h-full w-20 items-center justify-center">
             <Logo class="h-10 w-10 text-white" />
@@ -153,7 +155,9 @@ function onMicrioError() {
       class="absolute top-0 z-10 h-full w-full bg-black/60 text-white backdrop-blur-lg"
       v-show="overlay === 'hint'"
     >
-      <Navbar class="flex h-20 w-full items-center justify-between">
+      <Navbar
+        class="flex h-20 w-full items-center justify-between"
+      >
         <template v-slot:icon class="w-20">
           <div class="flex h-full w-20 items-center justify-center">
             <Logo class="h-10 w-10 text-white" />
@@ -228,22 +232,7 @@ function onMicrioError() {
         <TransitionOpacity>
           <div
             v-if="micrio?.tour && micrio?.marker"
-            class="pointer-events-none absolute inset-0 flex p-10"
-            :class="
-              (() => {
-                if (micrio.marker.class?.includes('top-left'))
-                  return 'items-start justify-start';
-                if (micrio.marker.class?.includes('top-right'))
-                  return 'top-32 items-start justify-end';
-                if (micrio.marker.class?.includes('bottom-right'))
-                  return 'items-end justify-end';
-                if (micrio.marker.class?.includes('bottom-left'))
-                  return 'items-end justify-start';
-
-                // default: bottom-right
-                return 'items-end justify-end';
-              })()
-            "
+            class="pointer-events-none absolute inset-0 flex items-end justify-end"
           >
             <Annotation
               @onPrevClick="micrio.tour.controls.previous"
@@ -256,7 +245,7 @@ function onMicrioError() {
               <template #body>
                 <AudioPlayer
                   v-model="isAudioPlaying"
-                  class="pointer-events-auto relative flex w-full flex-col items-center justify-between"
+                  class="pointer-events-auto relative flex w-full flex-col items-center justify-between p-4"
                 />
               </template>
             </Annotation>

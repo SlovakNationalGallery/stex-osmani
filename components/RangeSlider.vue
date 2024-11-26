@@ -9,11 +9,11 @@
       @mousemove="$emit('mousemove', value)"
       @mousedown="$emit('mousedown')"
       @mouseup="$emit('mouseup', value)"
-      class="slider-thumb z-50 h-2 w-full appearance-none overflow-hidden rounded-full bg-black/20"
+      class="slider-thumb z-50 h-2 w-full appearance-none overflow-hidden rounded-full bg-white/20"
     />
     <!-- Progress Bar Overlay -->
     <div
-      class="pointer-events-none absolute left-0 top-0 h-2 rounded-full bg-black"
+      class="pointer-events-none absolute left-0 top-0 h-2 rounded-full bg-white"
       :style="{
         width: `calc(${((value - (min - 4)) / (max + 4 - min)) * 100}%)`,
       }"
