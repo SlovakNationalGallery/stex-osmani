@@ -42,25 +42,25 @@ import Pause from "~/assets/img/pause.svg?component";
 
 const props = defineProps(["index"]);
 
+const isPlaying = defineModel();
 const audio = ref(new Audio(`assets/audio/audio_${props.index || 1}.mp3`));
-const isPlaying = ref(false);
 const currentTime = ref(0);
 const duration = ref(0);
 const isSeeking = ref(false);
-const wasStarted = ref(false);
 
 onMounted(() => {
   isPlaying.value = true;
-  audio.value.play();
+});
+
+watchEffect(() => {
+  if (isPlaying.value) {
+    audio.value.play();
+  } else {
+    audio.value.pause();
+  }
 });
 
 const playPause = () => {
-  if (isPlaying.value) {
-    audio.value.pause();
-  } else {
-    wasStarted.value = true;
-    audio.value.play();
-  }
   isPlaying.value = !isPlaying.value;
 };
 
@@ -111,7 +111,6 @@ audio.value.addEventListener("timeupdate", () => {
 
 audio.value.addEventListener("ended", () => {
   isPlaying.value = false;
-  wasStarted.value = false;
   audio.value.pause();
   audio.value.currentTime = 0;
 });

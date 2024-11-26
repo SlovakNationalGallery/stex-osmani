@@ -1,6 +1,5 @@
 <template>
   <div
-    class="flex h-20 w-full items-center justify-between border-b-3 border-black bg-white"
   >
     <div class="flex h-full items-center">
       <slot name="icon" />
