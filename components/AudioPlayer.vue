@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="flex gap-16 pb-6">
-      <button @click="fastBackwards(10)" class="flex items-center gap-2">
+      <button @click="fastBackwards(10)" class="flex items-center gap-2 px-1 py-2">
         <span class="font-bold">10s</span
-        ><ClockCounterClockwise class="w-12 px-1 py-2" />
+        ><ClockCounterClockwise class="w-10" />
       </button>
       <button @click="playPause">
         <Pause class="w-12 p-2" v-if="isPlaying" />
         <Play class="w-12 p-2" v-else />
       </button>
-      <button class="flex items-center gap-2">
-        <ClockClockwise @click="fastForwards(10)" class="w-12 px-1 py-2" /><span
+      <button class="flex items-center gap-2 px-1 py-2">
+        <ClockClockwise @click="fastForwards(10)" class="w-10" /><span
           class="font-bold"
           >10s</span
         >
