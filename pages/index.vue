@@ -4,9 +4,11 @@ import Question from "~/assets/img/question.svg?component";
 import Navbar from "~/layouts/Navbar.vue";
 import TransitionOpacity from "~/components/TransitionOpacity.vue";
 import Logo from "~/assets/img/logo.svg?component";
-
+import type { ArtworkItemType } from "~/data"
+import { SIMILAR_ARTWORKS } from "~/data";
 const micrio = ref<Micrio["Instance"]>();
 const overlay = ref<"intro" | "hint" | null>("intro");
+const zoomItem = ref<ArtworkItemType | null>(null);
 
 const { locale } = useI18n();
 const lang = ref(locale.value);
@@ -30,6 +32,18 @@ const closeHint = () => {
 
 const onMarkerOpen = () => {
   overlay.value = null;
+};
+
+const onNextClick = () => {
+  if (!micrio.value?.tour) return;
+  micrio.value.tour.controls.next();
+  zoomItem.value = null;
+};
+
+const onPrevClick = () => {
+  if (!micrio.value?.tour) return;
+  micrio.value.tour.controls.previous();
+  zoomItem.value = null;
 };
 
 watchEffect(() => {
@@ -105,14 +119,13 @@ function onMicrioError() {
         </button>
       </template>
     </Navbar>
+    <ArtworkOverlay :key="zoomItem.id" :item="zoomItem" v-if="zoomItem" @close="zoomItem = null" />
     <!-- Initial Idle screen -->
     <div
       class="absolute top-0 z-10 h-full w-full bg-black/60 text-white backdrop-blur-lg"
       v-show="overlay === 'intro'"
     >
-      <Navbar
-        class="flex h-20 w-full items-center justify-between"
-      >
+      <Navbar class="flex h-20 w-full items-center justify-between">
         <template v-slot:icon class="w-20">
           <div class="flex h-full w-20 items-center justify-center">
             <Logo class="h-10 w-10 text-white" />
@@ -145,7 +158,7 @@ function onMicrioError() {
         <div class="flex h-full w-full items-center justify-center">
           <img
             src="/assets/img/intro_screen.png"
-            class="rounded-3xl object-contain max-h-full max-w-full"
+            class="max-h-full max-w-full rounded-3xl object-contain"
           />
         </div>
       </div>
@@ -155,9 +168,7 @@ function onMicrioError() {
       class="absolute top-0 z-10 h-full w-full bg-black/60 text-white backdrop-blur-lg"
       v-show="overlay === 'hint'"
     >
-      <Navbar
-        class="flex h-20 w-full items-center justify-between"
-      >
+      <Navbar class="flex h-20 w-full items-center justify-between">
         <template v-slot:icon class="w-20">
           <div class="flex h-full w-20 items-center justify-center">
             <Logo class="h-10 w-10 text-white" />
@@ -198,7 +209,7 @@ function onMicrioError() {
         <div class="flex h-full w-full items-center justify-center">
           <img
             src="/assets/img/intro_screen.png"
-            class="rounded-3xl object-contain max-h-full max-w-full"
+            class="max-h-full max-w-full rounded-3xl object-contain"
           />
         </div>
       </div>
@@ -207,7 +218,7 @@ function onMicrioError() {
       <ClientOnly>
         <NuxtErrorBoundary @error="onMicrioError">
           <Micrio
-            id="aYdqm"
+            id="yGpXd"
             :lang="lang"
             @show="micrio = $event"
             @update="micrio = $event"
@@ -232,21 +243,44 @@ function onMicrioError() {
         <TransitionOpacity>
           <div
             v-if="micrio?.tour && micrio?.marker"
-            class="pointer-events-none absolute inset-0 flex items-end justify-end"
+            class="pointer-events-none absolute inset-0 flex items-end justify-end p-4"
           >
-            <Annotation
-              @onPrevClick="micrio.tour.controls.previous"
-              @onNextClick="micrio.tour.controls.next"
-            >
+            <Annotation @onPrevClick="onPrevClick" @onNextClick="onNextClick">
               <template #header>
                 <span>{{ (micrio.tour.currentStep ?? 0) + 1 }}. </span>
                 <span>{{ micrio.marker.title }}</span>
               </template>
               <template #body>
-                <AudioPlayer
-                  v-model="isAudioPlaying"
-                  class="pointer-events-auto relative flex w-full flex-col items-center justify-between p-4"
-                />
+                <div class="flex flex-col gap-7 p-4">
+                  <AudioPlayer
+                    v-model="isAudioPlaying"
+                    class="pointer-events-auto relative flex w-full flex-col items-center justify-between"
+                  />
+                  <div
+                    v-if="
+                      micrio.tour.currentStep &&
+                      SIMILAR_ARTWORKS[micrio.tour.currentStep] &&
+                      SIMILAR_ARTWORKS[micrio.tour.currentStep].length
+                    "
+                    class="pointer-events-auto flex flex-col gap-3"
+                  >
+                    <span>Súvisiace diela vo výstave</span>
+                    <button
+                      @click="zoomItem = item"
+                      v-for="item in SIMILAR_ARTWORKS[micrio.tour.currentStep]"
+                      class="flex h-20 w-full gap-2 overflow-hidden rounded-xl"
+                    >
+                      <img
+                        class="h-full w-1/3 rounded-xl bg-white object-cover"
+                        :src="`assets/tour/${item.thumbnailSrc}`"
+                      />
+                      <div class="flex flex-col justify-center text-left">
+                        <div>{{ item.title }}</div>
+                        <div>{{ item.subtitle }}</div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
               </template>
             </Annotation>
           </div>
