@@ -1,5 +1,5 @@
 <template>
-  <div class="pointer-events-none flex z-10">
+  <div class="pointer-events-none flex">
     <div
       class="w-[315px] rounded-xl border-2 border-white bg-black/70 fill-white text-white"
     >

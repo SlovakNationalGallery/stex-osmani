@@ -51,6 +51,7 @@ watchEffect(() => {
     isAudioPlaying.value = true;
   }
 });
+
 watch(locale, async () => {
   micrio.value?.tour?.cancel();
   await micrio.value?.camera.flyToCoverView();
@@ -144,7 +145,7 @@ function onMicrioError() {
         </template>
       </Navbar>
       <div
-        class="flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6"
+        class="z-20 flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6"
       >
         <div class="flex max-w-lg flex-col gap-16">
           <article class="flex flex-col gap-9">
@@ -184,7 +185,7 @@ function onMicrioError() {
         </template>
       </Navbar>
       <div
-        class="flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6"
+        class="z-20 flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6"
       >
         <div class="flex flex-col gap-16">
           <article class="flex flex-col gap-9">
@@ -241,7 +242,7 @@ function onMicrioError() {
         <TransitionOpacity>
           <div
             v-if="micrio?.tour && micrio?.marker"
-            class="pointer-events-none absolute inset-0 flex items-end justify-end p-4"
+            class="pointer-events-none absolute inset-0 flex items-end justify-end p-4 z-20"
           >
             <Annotation @onPrevClick="onPrevClick" @onNextClick="onNextClick">
               <template #header>
