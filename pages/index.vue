@@ -4,7 +4,7 @@ import Question from "~/assets/img/question.svg?component";
 import Navbar from "~/layouts/Navbar.vue";
 import TransitionOpacity from "~/components/TransitionOpacity.vue";
 import Logo from "~/assets/img/logo.svg?component";
-import type { ArtworkItemType } from "~/data"
+import type { ArtworkItemType } from "~/data";
 import { SIMILAR_ARTWORKS } from "~/data";
 const micrio = ref<Micrio["Instance"]>();
 const overlay = ref<"intro" | "hint" | null>("intro");
@@ -64,7 +64,6 @@ onMounted(() => {
 
 watch(micrio, (micrio, oldMicrio) => {
   if (!micrio) return;
-
   // Initialization
   if (!oldMicrio && micrio) {
     overlay.value = "intro";
@@ -106,10 +105,10 @@ function onMicrioError() {
       <template v-slot:content>
         <div class="flex items-end gap-6 px-6">
           <span class="align-bottom font-display text-3xl font-bold"
-            >Dielo</span
+            >Esterházyovský štvorpohreb v Trnave</span
           >
           <span class="pb-[3px] align-bottom font-body text-2xl font-medium"
-            >Author, Dating</span
+            >Neznámy maliar po roku 1652</span
           >
         </div>
       </template>
@@ -119,7 +118,12 @@ function onMicrioError() {
         </button>
       </template>
     </Navbar>
-    <ArtworkOverlay :key="zoomItem.id" :item="zoomItem" v-if="zoomItem" @close="zoomItem = null" />
+    <ArtworkOverlay
+      :key="zoomItem.id"
+      :item="zoomItem"
+      v-if="zoomItem"
+      @close="zoomItem = null"
+    />
     <!-- Initial Idle screen -->
     <div
       class="absolute top-0 z-10 h-full w-full bg-black/60 text-white backdrop-blur-lg"
@@ -134,10 +138,7 @@ function onMicrioError() {
         <template v-slot:content>
           <div class="flex items-end gap-6 px-6">
             <span class="align-bottom font-display text-3xl font-bold"
-              >Dielo</span
-            >
-            <span class="pb-[3px] align-bottom font-body text-2xl font-medium"
-              >Author, Dating</span
+              >Esterházyovský štvorpohreb v Trnave</span
             >
           </div>
         </template>
@@ -177,10 +178,7 @@ function onMicrioError() {
         <template v-slot:content>
           <div class="flex items-end gap-6 px-6">
             <span class="align-bottom font-display text-3xl font-bold"
-              >Dielo</span
-            >
-            <span class="pb-[3px] align-bottom font-body text-2xl font-medium"
-              >Author, Dating</span
+              >Esterházyovský štvorpohreb v Trnave</span
             >
           </div>
         </template>
@@ -251,8 +249,14 @@ function onMicrioError() {
                 <span>{{ micrio.marker.title }}</span>
               </template>
               <template #body>
-                <div class="flex flex-col gap-7 p-4">
+                <div
+                  class="flex flex-col gap-7 p-4"
+                  v-if="
+                    micrio.tour.currentStep || micrio.tour.currentStep === 0
+                  "
+                >
                   <AudioPlayer
+                    :index="micrio.tour.currentStep"
                     v-model="isAudioPlaying"
                     class="pointer-events-auto relative flex w-full flex-col items-center justify-between"
                   />
@@ -268,10 +272,10 @@ function onMicrioError() {
                     <button
                       @click="zoomItem = item"
                       v-for="item in SIMILAR_ARTWORKS[micrio.tour.currentStep]"
-                      class="flex h-20 w-full gap-2 overflow-hidden rounded-xl"
+                      class="flex h-20 w-full gap-2 overflow-hidden rounded-xl text-sm"
                     >
                       <img
-                        class="h-full w-1/3 rounded-xl bg-white object-cover"
+                        class="h-full w-24 shrink-0 rounded-xl bg-white object-cover"
                         :src="`assets/tour/${item.thumbnailSrc}`"
                       />
                       <div class="flex flex-col justify-center text-left">
