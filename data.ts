@@ -6,7 +6,7 @@ export type ArtworkItemType = {
   deepZoomSrc?: string;
 };
 
-export const AUDIO: Array<String> = {
+export const AUDIO = {
   sk: [
     "step_0/SNG_SK_Pohreb_SHWR_01.mp3",
     "step_1/SNG_SK_Pohreb_SHWR_02.mp3",
