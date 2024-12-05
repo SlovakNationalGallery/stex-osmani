@@ -91,7 +91,7 @@ function onMicrioError() {
 
 <template>
   <div
-    class="absolute inset-0 select-none overflow-hidden bg-black/50 font-body"
+    class="absolute inset-0 select-none overflow-hidden bg-black font-body"
   >
     <Navbar
       class="fixed top-0 z-10 flex h-20 w-full items-center justify-between bg-black/80 text-white"
@@ -320,7 +320,7 @@ function onMicrioError() {
               v-show="overlay !== 'hint'"
             >
               <template #header>
-                {{ `${(micrio.tour.currentStep ?? 0) + 1 } / ${ (micrio.tour.steps.length)} ${ micrio.marker.title }` }}
+                {{ `${(micrio.tour.currentStep ?? 0) + 1 } / ${ (micrio.tour.steps.length)}: ${ micrio.marker.title }` }}
               </template>
               <template #body>
                 <div

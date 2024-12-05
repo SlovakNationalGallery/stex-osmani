@@ -236,6 +236,7 @@ export const SIMILAR_ARTWORKS: {
       {
         id: "sultan/step-1/0",
         thumbnailSrc: "tour_2/step_1/0_thumb.jpg",
+        deepZoomSrc: "tour_2/step_1/0_zoom_dzi.dzi",
         sk: {
           title: "Janičiar s čiapkou börk",
           subtitle: "1568"
@@ -299,8 +300,8 @@ export const SIMILAR_ARTWORKS: {
           title: "Pilgrim from the fictional order of Geomaliers",
           subtitle: "1568",
         },
-        deepZoomSrc: "tour_2/step_3/0_zoom_dzi.dzi",
-        thumbnailSrc: "tour_2/step_3/0_thumb.jpg",
+        deepZoomSrc: "tour_2/step_4/0_zoom_dzi.dzi",
+        thumbnailSrc: "tour_2/step_4/0_thumb.jpg",
       },
     ],
     [
@@ -314,8 +315,8 @@ export const SIMILAR_ARTWORKS: {
           title: "Shiite dervish",
           subtitle: "1568",
         },
-        deepZoomSrc: "tour_2/step_4/0_zoom_dzi.dzi",
-        thumbnailSrc: "tour_2/step_4/0_thumb.jpg",
+        deepZoomSrc: "tour_2/step_5/0_zoom_dzi.dzi",
+        thumbnailSrc: "tour_2/step_5/0_thumb.jpg",
       },
     ],
     [],
