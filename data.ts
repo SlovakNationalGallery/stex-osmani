@@ -270,7 +270,8 @@ export const SIMILAR_ARTWORKS: {
           title: "The Ottoman Lady of the Sultan's Court",
           subtitle: "1568",
         },
-        thumbnailSrc: "tour_2/step_1/1_thumb.jpg",
+        deepZoomSrc: "tour_2/step_2/1_zoom_dzi.dzi",
+        thumbnailSrc: "tour_2/step_2/1_thumb.jpg",
       },
     ],
     [
