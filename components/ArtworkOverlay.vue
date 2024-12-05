@@ -6,13 +6,13 @@
       >
         <ZoomViewer
           v-if="deepZoomSrc"
-          :tile-sources="`assets/tour/${deepZoomSrc}`"
+          :tile-sources="`/assets/${deepZoomSrc}`"
           @close="$emit('close')"
         />
         <img
           v-else
           class="h-full w-full object-contain"
-          :src="`assets/tour/${thumbnailSrc}`"
+          :src="`/assets/${thumbnailSrc}`"
         />
         <button
           @click="$emit('close')"

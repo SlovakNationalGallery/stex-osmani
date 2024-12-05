@@ -178,15 +178,15 @@ async function changeStepBy(delta: number) {
       class="w-full rounded-xl bg-blue-ribbon-600 py-3 text-lg text-white"
       @click="onStartClick()"
     >
-      Začni objavovať
+      {{ $t("Spusti prehliadku") }}
     </button>
   </Teleport>
   <Teleport to="#restart-button">
     <button
       class="w-full rounded-xl border-2 border-white py-3 text-lg text-white"
-      @click="onStartClick()"
+      @click="() => window.location.reload()"
     >
-      Začni objavovať
+      {{ $t("Začni odznova") }}
     </button>
   </Teleport>
 </template>
