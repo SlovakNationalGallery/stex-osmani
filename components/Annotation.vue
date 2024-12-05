@@ -9,7 +9,7 @@
         <button @click="$emit('onPrevClick')">
           <ArrowLeft class="h-12 w-12 p-1" />
         </button>
-        <h3 class="font-display font-bold">
+        <h3 class="font-display font-bold text-center text-lg">
           <slot name="header"></slot>
         </h3>
         <button @click="$emit('onNextClick')">

@@ -320,8 +320,7 @@ function onMicrioError() {
               v-show="overlay !== 'hint'"
             >
               <template #header>
-                <span>{{ (micrio.tour.currentStep ?? 0) + 1 }}. </span>
-                <span>{{ micrio.marker.title }}</span>
+                {{ `${(micrio.tour.currentStep ?? 0) + 1 } / ${ (micrio.tour.steps.length)} ${ micrio.marker.title }` }}
               </template>
               <template #body>
                 <div
