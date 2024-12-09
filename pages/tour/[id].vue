@@ -4,7 +4,7 @@ import Question from "~/assets/img/question.svg?component";
 import Navbar from "~/layouts/Navbar.vue";
 import TransitionOpacity from "~/components/TransitionOpacity.vue";
 import Logo from "~/assets/img/logo.svg?component";
-import { SIMILAR_ARTWORKS, TOURS, AUDIO } from "~/data";
+import { SIMILAR_ARTWORKS, TOURS, AUDIO, SUBTITLES } from "~/data";
 const micrio = ref<Micrio["Instance"]>();
 const overlay = ref<"intro" | "hint" | null>("intro");
 const zoomItem = ref<any>(null);
@@ -331,6 +331,7 @@ function onMicrioError() {
                 >
                   <AudioPlayer
                     :audioSrc="AUDIO[id][lang][micrio.tour.currentStep]"
+                    :subtitleSrc="SUBTITLES[id][lang][micrio.tour.currentStep]"
                     v-model="isAudioPlaying"
                     class="pointer-events-auto relative flex w-full flex-col items-center justify-between"
                   />

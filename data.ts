@@ -72,6 +72,50 @@ export const AUDIO = {
   },
 };
 
+export const SUBTITLES = {
+  1: {
+    sk: [
+      "subtitles/01_Pohreb.json",
+      "subtitles/02_Pohreb.json",
+      "subtitles/03_Pohreb.json",
+      "subtitles/04_Pohreb.json",
+      "subtitles/05_Pohreb.json",
+      "subtitles/06_Pohreb.json",
+      "subtitles/07_Pohreb.json",
+    ],
+    en: [
+      "subtitles/01_The Esterházy Funeral.json",
+      "subtitles/02_The Esterházy Funeral.json",
+      "subtitles/03_The Esterházy Funeral.json",
+      "subtitles/04_The Esterházy Funeral.json",
+      "subtitles/05_The Esterházy Funeral.json",
+      "subtitles/06_The Esterházy Funeral.json",
+      "subtitles/07_The Esterházy Funeral.json",
+    ],
+  },
+  2: {
+    sk: [
+      "subtitles/01_Sultan.json",
+      "subtitles/02_Sultan.json",
+      "subtitles/03_Sultan.json",
+      "subtitles/04_Sultan.json",
+      "subtitles/05_Sultan.json",
+      "subtitles/06_Sultan.json",
+      "subtitles/07_Sultan.json",
+    ],
+    en: [
+      "subtitles/01_The Sultan in Venice.json",
+      "subtitles/02_The Sultan in Venice.json",
+      "subtitles/03_The Sultan in Venice.json",
+      "subtitles/04_The Sultan in Venice.json",
+      "subtitles/05_The Sultan in Venice.json",
+      "subtitles/06_The Sultan in Venice.json",
+      "subtitles/07_The Sultan in Venice.json",
+    ],
+  },
+};
+
+
 export const SIMILAR_ARTWORKS: {
   [key: string]: Array<Array<any>>;
 } = {

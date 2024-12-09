@@ -33,6 +33,11 @@
       <span>{{ formattedTime }}</span>
       <span>{{ formattedDuration }}</span>
     </div>
+    <Subtitles
+      :audioTime="currentTime"
+      :subtitleSrc="props.subtitleSrc"
+      class="pointer-events-none fixed inset-x-0 bottom-9 mx-auto max-w-screen-sm text-center"
+    />
   </div>
 </template>
 
@@ -43,7 +48,7 @@ import ClockCounterClockwise from "~/assets/img/clock-counter-clockwise.svg?comp
 import Play from "~/assets/img/play.svg?component";
 import Pause from "~/assets/img/pause.svg?component";
 
-const props = defineProps(["audioSrc"]);
+const props = defineProps(["audioSrc", "subtitleSrc"]);
 const isPlaying = defineModel();
 const audio = ref(new Audio(`/assets/${props.audioSrc}`));
 const currentTime = ref(0);
