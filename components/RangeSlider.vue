@@ -9,7 +9,7 @@
       @mousemove="$emit('mousemove', value)"
       @mousedown="$emit('mousedown')"
       @mouseup="$emit('mouseup', value)"
-      class="slider-thumb z-50 h-2 w-full appearance-none overflow-hidden rounded-full bg-white/20"
+      class="slider-thumb h-2 w-full appearance-none overflow-hidden rounded-full bg-white/20"
     />
     <!-- Progress Bar Overlay -->
     <div

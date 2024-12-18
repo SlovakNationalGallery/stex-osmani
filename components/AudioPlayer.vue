@@ -43,10 +43,9 @@ import ClockCounterClockwise from "~/assets/img/clock-counter-clockwise.svg?comp
 import Play from "~/assets/img/play.svg?component";
 import Pause from "~/assets/img/pause.svg?component";
 
-const props = defineProps(["index"]);
-
+const props = defineProps(["audioSrc"]);
 const isPlaying = defineModel();
-const audio = ref(new Audio(`assets/audio/audio_${props.index || 1}.mp3`));
+const audio = ref(new Audio(`/assets/${props.audioSrc}`));
 const currentTime = ref(0);
 const duration = ref(0);
 const isSeeking = ref(false);
