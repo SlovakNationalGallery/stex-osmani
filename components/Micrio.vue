@@ -134,11 +134,17 @@ function cancelTour() {
   micrioRef.value?.state.tour.set(undefined);
 }
 
+async function onStartClick() {
+  initialMarker.value?.close();
+  await nextTick()
+  initialMarker.value?.open();
+}
+
 async function changeStepBy(delta: number) {
   const tour = micrioRef.value?.state.$tour as
     | Models.ImageCultureData.MarkerTour
     | undefined;
-  const camera = micrioRef.value?.camera
+  const camera = micrioRef.value?.camera;
   if (tour?.goto === undefined) return;
   if (!camera) return;
 
@@ -147,7 +153,7 @@ async function changeStepBy(delta: number) {
     tour.currentStep! + delta < 0
   ) {
     cancelTour();
-    await camera.flyToFullView();
+    await camera.flyToCoverView();
     return;
   }
 
@@ -167,9 +173,20 @@ async function changeStepBy(delta: number) {
     toolbar="false"
     minimap="false"
   />
-  <Teleport to="#start-overlay">
-    <button class="bg-red-500" @click="initialMarker.open()">
-      Start journey
+  <Teleport to="#start-button">
+    <button
+      class="w-full rounded-xl bg-blue-ribbon-600 py-3 text-lg text-white"
+      @click="onStartClick()"
+    >
+      Začni objavovať
+    </button>
+  </Teleport>
+  <Teleport to="#restart-button">
+    <button
+      class="w-full rounded-xl border-2 border-white py-3 text-lg text-white"
+      @click="onStartClick()"
+    >
+      Začni objavovať
     </button>
   </Teleport>
 </template>
