@@ -18,15 +18,11 @@
         >
       </button>
     </div>
-    <RangeSlider
+    <AudioDuration
       class="relative flex w-full flex-col items-center"
+      :currentTime="currentTime"
       :min="0"
       :max="duration"
-      :model-value="currentTime"
-      :step="1"
-      @mousedown="seekUp"
-      @mouseup="seekDown"
-      @mousemove="seekMove"
     />
     <!-- Time indicators -->
     <div class="mt-2 flex w-full justify-between text-sm text-white">
@@ -47,8 +43,8 @@ import ClockClockwise from "~/assets/img/clock-clockwise.svg?component";
 import ClockCounterClockwise from "~/assets/img/clock-counter-clockwise.svg?component";
 import Play from "~/assets/img/play.svg?component";
 import Pause from "~/assets/img/pause.svg?component";
-const config = useRuntimeConfig()
-const { baseURL } = config.app
+const config = useRuntimeConfig();
+const { baseURL } = config.app;
 
 const props = defineProps(["audioSrc", "subtitleSrc"]);
 const isPlaying = defineModel();
