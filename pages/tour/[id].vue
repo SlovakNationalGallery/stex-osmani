@@ -150,7 +150,7 @@ function onMicrioError() {
       <div
         class="flex h-[calc(100%-80px)] w-full items-center justify-between gap-16 pb-20 pl-16 pr-6"
       >
-        <div class="flex max-w-lg flex-col gap-16">
+        <div class="flex max-w-xl flex-col gap-16">
           <article class="flex flex-col gap-9">
             <h1 class="text-5xl font-medium">
               {{ TOURS[id][lang].desc_title }}
