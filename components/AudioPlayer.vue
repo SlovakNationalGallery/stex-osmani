@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="flex gap-16 pb-6">
-      <button @click="fastBackwards(10)" class="flex items-center gap-2 px-1 py-2">
-        <span class="font-bold">10s</span
-        ><ClockCounterClockwise class="w-10" />
+    <div class="flex w-full justify-between pb-6">
+      <button
+        @click="fastBackwards(10)"
+        class="flex items-center gap-2 px-1 py-2"
+      >
+        <span class="font-bold">10s</span><ClockCounterClockwise class="w-10" />
       </button>
       <button @click="playPause">
         <Pause class="w-12 p-2" v-if="isPlaying" />
