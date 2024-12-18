@@ -13,6 +13,9 @@ const { locale } = useI18n();
 const { id } = useRoute().params as { id: string };
 const lang = ref(locale.value);
 const isAudioPlaying = ref(true);
+const config = useRuntimeConfig()
+const { baseURL } = config.app
+
 
 //5 minute reload timer
 const RELOAD_TIMER_DURATION = 5 * 60 * 1000;
@@ -353,7 +356,7 @@ function onMicrioError() {
                     >
                       <img
                         class="h-full w-24 shrink-0 rounded-xl bg-white object-cover"
-                        :src="`/assets/${item.thumbnailSrc}`"
+                        :src="`${baseURL}${item.thumbnailSrc}`"
                       />
                       <div class="flex flex-col justify-center text-left">
                         <div>{{ item[lang].title }}</div>

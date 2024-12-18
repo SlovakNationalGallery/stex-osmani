@@ -6,13 +6,13 @@
       >
         <ZoomViewer
           v-if="deepZoomSrc"
-          :tile-sources="`/assets/${deepZoomSrc}`"
+          :tile-sources="`${baseURL}${deepZoomSrc}`"
           @close="$emit('close')"
         />
         <img
           v-else
           class="h-full w-full object-contain"
-          :src="`/assets/${thumbnailSrc}`"
+          :src="`${baseURL}${thumbnailSrc}`"
         />
         <button
           @click="$emit('close')"
@@ -27,6 +27,8 @@
 <script setup>
 import ZoomViewer from "~/components/ZoomViewer.vue";
 import X from "~/assets/img/x-mark.svg?component";
+const config = useRuntimeConfig()
+const { baseURL } = config.app
 
 const props = defineProps(["item"]);
 const { thumbnailSrc, deepZoomSrc } = props.item;

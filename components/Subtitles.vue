@@ -10,7 +10,10 @@
 <script setup>
 import moment from "moment";
 const props = defineProps(["audioTime", "subtitleSrc"]);
-const { data: subtitlesData } = await useFetch(`/assets/${props.subtitleSrc}`);
+const config = useRuntimeConfig()
+const { baseURL } = config.app
+
+const { data: subtitlesData } = await useFetch(`${baseURL}${props.subtitleSrc}`);
 
 const renderedText = computed(() =>
   subtitlesData.value.filter((subtitle) => {
