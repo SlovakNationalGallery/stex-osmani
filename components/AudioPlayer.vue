@@ -1,35 +1,39 @@
 <template>
   <div>
-    <div class="flex gap-16 pb-6">
-      <button @click="fastBackwards(10)" class="flex items-center gap-2">
-        <span class="font-bold">10s</span><ClockCounterClockwise class="w-8" />
+    <div class="flex w-full justify-between pb-6">
+      <button
+        @click="fastBackwards(10)"
+        class="flex items-center gap-2 px-1 py-2"
+      >
+        <span class="font-bold">10s</span><ClockCounterClockwise class="w-10" />
       </button>
       <button @click="playPause">
-        <Pause class="w-8" v-if="isPlaying" />
-        <Play class="w-8" v-else />
+        <Pause class="w-12 p-2" v-if="isPlaying" />
+        <Play class="w-12 p-2" v-else />
       </button>
-      <button class="flex items-center gap-2">
-        <ClockClockwise @click="fastForwards(10)" class="w-8" /><span
+      <button class="flex items-center gap-2 px-1 py-2">
+        <ClockClockwise @click="fastForwards(10)" class="w-10" /><span
           class="font-bold"
           >10s</span
         >
       </button>
     </div>
-    <RangeSlider
+    <AudioDuration
       class="relative flex w-full flex-col items-center"
+      :currentTime="currentTime"
       :min="0"
       :max="duration"
-      :model-value="currentTime"
-      :step="1"
-      @mousedown="seekUp"
-      @mouseup="seekDown"
-      @mousemove="seekMove"
     />
     <!-- Time indicators -->
-    <div class="mt-2 flex w-full justify-between text-sm text-black">
+    <div class="mt-2 flex w-full justify-between text-sm text-white">
       <span>{{ formattedTime }}</span>
       <span>{{ formattedDuration }}</span>
     </div>
+    <Subtitles
+      :audioTime="currentTime"
+      :subtitleSrc="props.subtitleSrc"
+      class="pointer-events-none fixed inset-x-0 bottom-9 mx-auto max-w-screen-sm text-center"
+    />
   </div>
 </template>
 
@@ -39,11 +43,12 @@ import ClockClockwise from "~/assets/img/clock-clockwise.svg?component";
 import ClockCounterClockwise from "~/assets/img/clock-counter-clockwise.svg?component";
 import Play from "~/assets/img/play.svg?component";
 import Pause from "~/assets/img/pause.svg?component";
+const config = useRuntimeConfig();
+const { baseURL } = config.app;
 
-const props = defineProps(["index"]);
-
+const props = defineProps(["audioSrc", "subtitleSrc"]);
 const isPlaying = defineModel();
-const audio = ref(new Audio(`assets/audio/audio_${props.index || 1}.mp3`));
+const audio = ref(new Audio(`${baseURL}${props.audioSrc}`));
 const currentTime = ref(0);
 const duration = ref(0);
 const isSeeking = ref(false);
