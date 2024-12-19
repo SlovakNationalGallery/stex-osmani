@@ -14,15 +14,14 @@ export const TOURS = {
     },
   },
   2: {
-    title: "Sultán v Benátkach",
     thumbnailSrc: "/assets/tour_2/intro_sultan.jpg",
     micrioId: "AhDVK",
-    sk: { title: "Sultán v Benátkach",
+    sk: { title: "Inscenovaný obraz osmanskej spoločnosti",
       desc_title: "Navštívil skutočne sultán Benátky?",
       desc_subtitle: "Spoznaj námet obrazu v interaktívnom audiopríbehu"
      },
     en: {
-      title: "Sultan in Venice",
+      title: "Staged depiction of Ottoman society",
       desc_title: "Did the Sultan really visit Venice?",
       desc_subtitle: "Discover the theme of the painting in an interactive audio story"
     },
