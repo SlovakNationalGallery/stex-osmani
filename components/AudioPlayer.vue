@@ -47,10 +47,12 @@ import ClockClockwise from "~/assets/img/clock-clockwise.svg?component";
 import ClockCounterClockwise from "~/assets/img/clock-counter-clockwise.svg?component";
 import Play from "~/assets/img/play.svg?component";
 import Pause from "~/assets/img/pause.svg?component";
+const config = useRuntimeConfig()
+const { baseURL } = config.app
 
 const props = defineProps(["audioSrc", "subtitleSrc"]);
 const isPlaying = defineModel();
-const audio = ref(new Audio(`/assets/${props.audioSrc}`));
+const audio = ref(new Audio(`${baseURL}${props.audioSrc}`));
 const currentTime = ref(0);
 const duration = ref(0);
 const isSeeking = ref(false);
